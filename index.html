@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语学习工具</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>英语学习工具</h1>
+        
+        <!-- 标签页切换 -->
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="vocabulary">单词本</button>
+            <button class="tab-btn" data-tab="listening">听力模块</button>
+        </div>
+        
+        <!-- 单词本模块 -->
+        <div id="vocabulary" class="tab-content active">
+            <div class="section">
+                <h2>单词添加</h2>
+                <form id="add-word-form">
+                    <div class="form-group">
+                        <label for="word">英文单词：</label>
+                        <input type="text" id="word" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phonetic">音标：</label>
+                        <input type="text" id="phonetic">
+                    </div>
+                    <div class="form-group">
+                        <label for="meaning">中文释义：</label>
+                        <input type="text" id="meaning" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="part-of-speech">词性：</label>
+                        <input type="text" id="part-of-speech">
+                    </div>
+                    <div class="form-group">
+                        <label for="tag">分类标签：</label>
+                        <select id="tag">
+                            <option value="未分类">未分类</option>
+                            <option value="听力生词">听力生词</option>
+                            <option value="阅读生词">阅读生词</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">添加</button>
+                </form>
+            </div>
+            
+            <div class="section">
+                <h2>单词列表</h2>
+                <div class="filter-section">
+                    <button class="filter-btn active" data-filter="all">全部</button>
+                    <button class="filter-btn" data-filter="未分类">未分类</button>
+                    <button class="filter-btn" data-filter="听力生词">听力生词</button>
+                    <button class="filter-btn" data-filter="阅读生词">阅读生词</button>
+                    <span id="filter-count">共 0 个单词</span>
+                </div>
+                <ul id="word-list"></ul>
+            </div>
+        </div>
+        
+        <!-- 听力模块 -->
+        <div id="listening" class="tab-content">
+            <div class="section">
+                <h2>音频上传</h2>
+                <input type="file" id="audio-upload" accept="audio/mp3,audio/wav">
+                <div id="audio-info"></div>
+            </div>
+            
+            <div class="section">
+                <h2>播放控制</h2>
+                <div class="audio-player">
+                    <audio id="audio-element"></audio>
+                    <div class="controls">
+                        <button id="play-btn">播放</button>
+                        <button id="stop-btn">停止</button>
+                        <div class="progress-container">
+                            <div id="progress-bar"></div>
+                            <div id="progress-markers"></div>
+                        </div>
+                        <div class="time-display">
+                            <span id="current-time">00:00</span> / <span id="total-time">00:00</span>
+                        </div>
+                    </div>
+                    <div class="advanced-controls">
+                        <div class="speed-control">
+                            <label for="playback-speed">倍速：</label>
+                            <select id="playback-speed">
+                                <option value="0.5">0.5x</option>
+                                <option value="0.75">0.75x</option>
+                                <option value="1.0" selected>1.0x</option>
+                                <option value="1.25">1.25x</option>
+                                <option value="1.5">1.5x</option>
+                                <option value="2.0">2.0x</option>
+                            </select>
+                            <span id="current-speed">当前倍速：1.0x</span>
+                        </div>
+                        <button id="loop-btn">循环模式</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="message"></div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

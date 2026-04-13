@@ -1,0 +1,381 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c3e50;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #34495e;
+}
+
+/* 标签页样式 */
+.tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #3498db;
+}
+
+.tab-btn {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: #7f8c8d;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    color: #3498db;
+    border-bottom: 3px solid #3498db;
+    font-weight: bold;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* 区块样式 */
+.section {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* 表单样式 */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: inline-block;
+    width: 120px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    padding: 8px;
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+/* 单词列表样式 */
+.filter-section {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-btn {
+    padding: 5px 15px;
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-btn.active {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+#word-list {
+    list-style: none;
+}
+
+#word-list li {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+#word-list li:hover {
+    background-color: #f9f9f9;
+}
+
+.word-info {
+    flex: 1;
+}
+
+.word-info .word {
+    font-weight: bold;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.word-info .phonetic {
+    color: #7f8c8d;
+    margin-right: 10px;
+}
+
+.word-info .meaning {
+    margin-top: 5px;
+}
+
+.word-info .part-of-speech {
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+.word-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.play-btn,
+.delete-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.play-btn {
+    background-color: #27ae60;
+    color: white;
+}
+
+.play-btn:hover {
+    background-color: #229954;
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+/* 音频播放器样式 */
+.audio-player {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+#play-btn,
+#stop-btn,
+#loop-btn {
+    padding: 8px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#play-btn:hover,
+#stop-btn:hover,
+#loop-btn:hover {
+    background-color: #2980b9;
+}
+
+#loop-btn.active {
+    background-color: #27ae60;
+}
+
+.progress-container {
+    flex: 1;
+    height: 8px;
+    background-color: #ddd;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+}
+
+#progress-bar {
+    height: 100%;
+    background-color: #3498db;
+    border-radius: 4px;
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+#progress-markers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    pointer-events: none;
+}
+
+.progress-marker {
+    position: absolute;
+    top: -3px;
+    width: 14px;
+    height: 14px;
+    background-color: #e74c3c;
+    border-radius: 50%;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.2s ease;
+}
+
+.progress-marker:hover {
+    transform: scale(1.2);
+}
+
+.time-display {
+    font-size: 14px;
+    color: #7f8c8d;
+    min-width: 100px;
+}
+
+.advanced-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.speed-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#playback-speed {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+#current-speed {
+    font-size: 14px;
+    color: #7f8c8d;
+}
+
+/* 音频信息样式 */
+#audio-info {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+}
+
+/* 消息提示样式 */
+#message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#message.success {
+    background-color: #27ae60;
+    opacity: 1;
+}
+
+#message.error {
+    background-color: #e74c3c;
+    opacity: 1;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .form-group label {
+        display: block;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    .form-group input,
+    .form-group select {
+        width: 100%;
+    }
+    
+    .filter-section {
+        flex-wrap: wrap;
+    }
+    
+    .controls {
+        flex-wrap: wrap;
+    }
+    
+    .advanced-controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    #word-list li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .word-actions {
+        align-self: flex-end;
+    }
+}
