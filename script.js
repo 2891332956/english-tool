@@ -2,6 +2,7 @@
 let words = [];
 let currentFilter = 'all';
 let audioMarkers = [];
+let currentTranscript = '';
 
 // DOM加载完成后执行
 document.addEventListener('DOMContentLoaded', function() {
@@ -13,6 +14,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // 初始化听力功能
     initListening();
+    
+    // 初始化听力原文功能
+    initTranscript();
 });
 
 // 标签页切换功能
@@ -299,6 +303,7 @@ function initListening() {
         const speed = parseFloat(this.value);
         audioElement.playbackRate = speed;
         currentSpeedDisplay.textContent = `当前倍速：${speed}x`;
+        showMessage(`倍速已调整为 ${speed}x`, 'success');
     });
     
     // 循环模式
@@ -360,6 +365,36 @@ function renderMarkers() {
         });
         
         markersContainer.appendChild(markerElement);
+    });
+}
+
+// 听力原文功能
+function initTranscript() {
+    const transcriptInput = document.getElementById('transcript-input');
+    const saveTranscriptBtn = document.getElementById('save-transcript-btn');
+    const showTranscriptBtn = document.getElementById('show-transcript-btn');
+    const transcriptContent = document.getElementById('transcript-content');
+    
+    // 保存原文
+    saveTranscriptBtn.addEventListener('click', function() {
+        const transcript = transcriptInput.value.trim();
+        if (transcript) {
+            currentTranscript = transcript;
+            showMessage('原文保存成功', 'success');
+        } else {
+            showMessage('请输入听力原文', 'error');
+        }
+    });
+    
+    // 查看原文
+    showTranscriptBtn.addEventListener('click', function() {
+        if (currentTranscript) {
+            transcriptContent.textContent = currentTranscript;
+            transcriptContent.style.display = 'block';
+            showMessage('原文已显示', 'success');
+        } else {
+            showMessage('请先保存听力原文', 'error');
+        }
     });
 }
 
