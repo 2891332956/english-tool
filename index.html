@@ -14,6 +14,7 @@
         <div class="tabs">
             <button class="tab-btn active" data-tab="vocabulary">单词本</button>
             <button class="tab-btn" data-tab="listening">听力模块</button>
+            <button class="tab-btn" data-tab="ai-assistant">AI 助手</button>
         </div>
         
         <!-- 单词本模块 -->
@@ -113,10 +114,124 @@
                 </div>
             </div>
         </div>
+        
+        <!-- AI 助手模块 -->
+        <div id="ai-assistant" class="tab-content">
+            <div class="section">
+                <h2>🤖 DeepSeek AI 助手</h2>
+                <div class="ai-assistant">
+                    <div class="ai-input-section">
+                        <input type="text" id="ai-question" placeholder="输入你的英语学习问题，例如：explain the word serendipity">
+                        <button id="ai-submit" class="btn">发送</button>
+                    </div>
+                    <div class="ai-response-section">
+                        <h3>回答：</h3>
+                        <div id="ai-answer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
     <div id="message"></div>
     
     <script src="script.js"></script>
+    <script>
+        // DeepSeek AI 助手功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // API Key 定义（测试时替换为真实 Key，测试后恢复占位符）
+            const DEEPSEEK_API_KEY = "YOUR_API_KEY_HERE";   // 使用这个占位符，不要填任何真实 Key
+            // 测试时请把 YOUR_API_KEY_HERE 替换成你的真实 DeepSeek API Key，测试完成后必须立即删除或替换回占位符！
+            
+            // 初始化 AI 助手
+            initAiAssistant();
+            
+            function initAiAssistant() {
+                const aiQuestion = document.getElementById('ai-question');
+                const aiSubmit = document.getElementById('ai-submit');
+                const aiAnswer = document.getElementById('ai-answer');
+                
+                // 发送按钮点击事件
+                aiSubmit.addEventListener('click', function() {
+                    const question = aiQuestion.value.trim();
+                    if (question) {
+                        getAiResponse(question);
+                    } else {
+                        showMessage('请输入问题', 'error');
+                    }
+                });
+                
+                // 回车键发送
+                aiQuestion.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        const question = aiQuestion.value.trim();
+                        if (question) {
+                            getAiResponse(question);
+                        } else {
+                            showMessage('请输入问题', 'error');
+                        }
+                    }
+                });
+            }
+            
+            // 获取 AI 回答
+            function getAiResponse(question) {
+                const aiAnswer = document.getElementById('ai-answer');
+                
+                // 显示加载状态
+                aiAnswer.innerHTML = '<p>思考中...</p>';
+                
+                // 检查 API Key 是否填写
+                if (DEEPSEEK_API_KEY === "YOUR_API_KEY_HERE") {
+                    aiAnswer.innerHTML = '<p style="color: red;">错误：请替换 YOUR_API_KEY_HERE 为真实的 DeepSeek API Key</p>';
+                    showMessage('请填写 API Key', 'error');
+                    return;
+                }
+                
+                // 构建请求数据
+                const requestData = {
+                    model: "deepseek-chat",
+                    messages: [
+                        {
+                            role: "system",
+                            content: "你是一个专业、友好、耐心且幽默的英语学习助手。请用简单易懂的中文回答用户的问题，并尽量提供例句和实用解释。"
+                        },
+                        {
+                            role: "user",
+                            content: question
+                        }
+                    ],
+                    temperature: 0.7
+                };
+                
+                // 发送请求
+                fetch('https://api.deepseek.com/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${DEEPSEEK_API_KEY}`
+                    },
+                    body: JSON.stringify(requestData)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('API 请求失败');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // 显示回答
+                    const answer = data.choices[0].message.content;
+                    aiAnswer.innerHTML = answer.replace(/\n/g, '<br>');
+                    showMessage('回答已生成', 'success');
+                })
+                .catch(error => {
+                    // 错误处理
+                    aiAnswer.innerHTML = `<p style="color: red;">错误：${error.message}</p>`;
+                    showMessage('请求失败，请检查网络或 API Key', 'error');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
