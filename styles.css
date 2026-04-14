@@ -373,6 +373,47 @@ h2 {
     opacity: 1;
 }
 
+/* AI 助手样式 */
+.ai-assistant {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ai-input-section {
+    display: flex;
+    gap: 10px;
+}
+
+.ai-input-section input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.ai-response-section {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.ai-response-section h3 {
+    margin-bottom: 15px;
+    color: #34495e;
+}
+
+#ai-answer {
+    line-height: 1.6;
+    white-space: pre-wrap;
+    background-color: white;
+    padding: 15px;
+    border-radius: 4px;
+    min-height: 150px;
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     .container {
@@ -412,5 +453,13 @@ h2 {
     
     .word-actions {
         align-self: flex-end;
+    }
+    
+    .ai-input-section {
+        flex-direction: column;
+    }
+    
+    .ai-input-section input {
+        width: 100%;
     }
 }
